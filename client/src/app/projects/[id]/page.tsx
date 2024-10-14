@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ProjectHeader from "../ProjectHeader";
 import ListView from "../ListView";
 import TableView from "../TableView";
+import ModalNewTask from "../ModalNewTask";
 
 type Props = {
   params: { id: string };
@@ -12,11 +13,16 @@ type Props = {
 const Projects = ({ params }: Props) => {
   const { id } = params;
 
-  const [activeTab, setActiveTab] = useState("Board");
-  const [isModelNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("Table");
+  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
   return (
     <div>
+      <ModalNewTask
+        isOpen={isModalNewTaskOpen}
+        onClose={() => setIsModalNewTaskOpen(false)}
+        id={id}
+      />
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab == "List" && (
